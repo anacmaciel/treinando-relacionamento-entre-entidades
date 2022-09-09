@@ -15,6 +15,11 @@ public class AlunoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nomeAluno;
-    @OneToMany(mappedBy = "alunos", cascade = CascadeType.ALL)
-    private List<TrabalhoModel> trabalhos;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "aluno_trabalho",
+            joinColumns = {@JoinColumn(name = "aluno_id",
+                    referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "trabalho_id",
+                    referencedColumnName = "id")})
+    private TrabalhoModel trabalho;
 }
